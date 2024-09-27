@@ -89,6 +89,10 @@ class UserEntity(EntityBase):
         back_populates="user"
     )
 
+    # All of the todo items for this user.
+    # NOTE: This field establishes a one-to-many relationship between the users and todo table.
+    todo_items: Mapped[list["TodoEntity"]] = relationship(back_populates="user")
+
     def full_name(self) -> str:
         """
         Returns the full name of the user.

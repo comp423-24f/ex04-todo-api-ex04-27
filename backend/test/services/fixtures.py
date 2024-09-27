@@ -11,6 +11,7 @@ from ...services import (
     EventService,
     RoomService,
     ApplicationService,
+    TodoService,
 )
 from ...services.academics import HiringService
 from ...services.article import ArticleService
@@ -81,3 +82,8 @@ def article_svc(session: Session):
 def application_svc(session: Session):
     """ApplicationService fixture."""
     return ApplicationService(session, PermissionService(session))
+
+
+@pytest.fixture()
+def todo_svc(session: Session):
+    return TodoService(session, PermissionService(session))

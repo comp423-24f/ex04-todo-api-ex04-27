@@ -83,6 +83,11 @@ const routes: Routes = [
       import('./applications/applications.module').then(
         (m) => m.ApplicationsModule
       )
+  },
+  {
+    path: 'todo',
+    title: 'To-Do',
+    loadChildren: () => import('./todo/todo.module').then((m) => m.TodoModule)
   }
 ];
 

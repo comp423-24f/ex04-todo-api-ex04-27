@@ -1,0 +1,46 @@
+<!-- This container wrapper class ensures that the pane grows to the width and height of the view.-->
+<div class="container">
+    <!-- This mat pane contains all of the elements for this page.-->
+    <mat-pane>
+        <!-- The mat card header includes the title for the page. -->
+        <mat-card-header>
+            <mat-card-title>To-Do List</mat-card-title>
+        </mat-card-header>
+        <!-- The mat card content includes all of the to-do list items. -->
+        <mat-card-content>
+            <mat-list>
+                <mat-divider />
+                @for(item of todoService.todoList(); track item.id) {
+                    <mat-list-item role="listitem">
+                        <div class="list-item-row">
+                            <mat-checkbox [checked]="item.completed" (change)="checkmarkPressed(item)"/>
+                            {{ item.title }}
+                            <button mat-icon-button class="delete-button" (click)="deleteItem(item)">
+                                <mat-icon class=tertiary-icon>delete</mat-icon>
+                            </button>
+                        </div>
+                    </mat-list-item>
+                    <mat-divider />
+                } @empty {
+                    <p id="empty-text">There is nothing in your to-do list! Add an item below.</p>
+                }
+              </mat-list>
+            </mat-card-content>
+        <!-- Stores the bottom bar with a text input and a button. -->
+        <mat-card-actions>
+            <!-- This form field enables user input to add a new item. -->
+            <mat-form-field appearance="outline" color="accent">
+                <mat-label>New To-Do Item</mat-label>
+                <input
+                matInput
+                placeholder=""
+                [formControl]="newItemFormControl"
+                required />  
+            </mat-form-field>
+            <button mat-flat-button class="primary-button" (click)="addNewItem()" [disabled]="newItemFormControl.value?.length == 0">
+                <mat-icon>add</mat-icon>
+                Add To-Do
+            </button>
+        </mat-card-actions>
+    </mat-pane>
+</div>
