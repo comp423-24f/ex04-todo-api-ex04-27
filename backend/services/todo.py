@@ -1,5 +1,5 @@
 """
-The Todo Service allows the API to manipulate organizations data in the database.
+The Todo Service allows the API to manipulate todo data in the database.
 """
 
 from fastapi import Depends
