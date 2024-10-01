@@ -41,18 +41,9 @@ export class TodoService {
       completed: false
     };
 
-    // TODO: Using the `http` HttpClient, call the appropriate
-    // API to add a todo item for the user.
-    //
-    // This API call should return an `Observable` object.
-    // Subscribe to the observable, and with the observable's
-    // result, modify the exising `todoList` `WritableSignal`
-    // object to include the newly added item. You may refer
-    // to your ex02 solution to see how you modified the data
-    // of the signal.
-    //
-    // Feel free to use the completed `getItems()` method as
-    // a guide.
+    this.http
+      .post<ToDoListItem>(`api/todo`, newItem)
+      .subscribe((item) => this.todoList.update((todos) => [...todos, item]));
   }
 
   /**
@@ -60,18 +51,14 @@ export class TodoService {
    * @param item: Item to toggle the checkmark status for.
    */
   toggleItemCheckmark(item: ToDoListItem) {
-    // TODO: Using the `http` HttpClient, call the appropriate
-    // API to toggle the checkmark of an item for the user.
-    //
-    // This API call should return an `Observable` object.
-    // Subscribe to the observable, and with the observable's
-    // result, modify the exising `todoList` `WritableSignal`
-    // object to include the newly modified item. You may refer
-    // to your ex02 solution to see how you modified the data
-    // of the signal.
-    //
-    // Feel free to use the completed `getItems()` method as
-    // a guide.
+    this.http
+      .put<ToDoListItem>(`api/todo`, item)
+      .subscribe((item) =>
+        this.todoList.update((todos) => [
+          ...todos.filter((todo) => todo.id !== item.id),
+          item
+        ])
+      );
   }
 
   /**
@@ -79,16 +66,12 @@ export class TodoService {
    * @param item:  Item to delete.
    */
   deleteItem(item: ToDoListItem) {
-    // TODO: Using the `http` HttpClient, call the appropriate
-    // API to toggle the delete an item item for the user.
-    //
-    // This API call should return an `Observable` object.
-    // Subscribe to the observable, using the `item` parameter,
-    // modify the `todoList` `WritableSignal` to exclude this item.
-    // You may refer  to your ex02 solution to see how you modified
-    // the data of the signal.
-    //
-    // Feel free to use the completed `getItems()` method as
-    // a guide.
+    this.http
+      .delete(`api/todo/${item.id}`)
+      .subscribe(() =>
+        this.todoList.update((todos) => [
+          ...todos.filter((todo) => todo.id !== item.id)
+        ])
+      );
   }
 }

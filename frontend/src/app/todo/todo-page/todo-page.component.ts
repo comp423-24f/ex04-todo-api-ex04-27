@@ -39,7 +39,10 @@ export class TodoPageComponent {
    * The constructor also defines fields provided via
    * dependency injection.
    */
-  constructor(protected todoService: TodoService) {}
+  constructor(protected todoService: TodoService) {
+    // Set items
+    todoService.getItems();
+  }
 
   /** Adds a new item to the to-do list based on the string typed in. */
   addNewItem() {
@@ -49,7 +52,6 @@ export class TodoPageComponent {
     // is not null and if it is not empty.
     if (newItemTitle && newItemTitle.length > 0) {
       this.todoService.addItem(newItemTitle);
-      console.log(this.todoService.todoList());
     }
   }
 

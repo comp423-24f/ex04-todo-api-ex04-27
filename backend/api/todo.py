@@ -26,43 +26,30 @@ def get_todos(
     """API to get all todo items."""
     return todo_service.all(subject)
 
+@api.post("", response_model=TodoItem, tags=["Todo"])
+def new_todo(
+    item: TodoItem, 
+    todo_service: TodoService = Depends(), 
+    subject: User = Depends(registered_user)
+) -> TodoItem:
+    """API to create a new todo item."""
+    return todo_service.create(subject, item)
 
-# TODO: Create a POST API that enables users to create todo list items.
-# Requests to this API should include a request body matching the
-# Pydantic model type `TodoItem`.
-#
-# Hint: Inject the `TodoService` into your API method, like shown in the
-# `get_todos` function. Use the `TodoService.create(subject, item)` method
-# to complete the creation operation.
-#
-# This API should respond with the created `TodoItem` to the frontend once called.
-#
-# Your solution below:
-...
-
-
-# TODO: Create a PUT API that enables users to toggle todo list items.
-# Requests to this API should include a request body matching the
-# Pydantic model type `TodoItem`.
-#
-# Hint: Inject the `TodoService` into your API method, like shown in the
-# `get_todos` function. Use the `TodoService.toggle_checkmark(subject, item)`
-# method to complete this operation.
-#
-# This API should respond with the edited `TodoItem` to the frontend once called.
-#
-# Your solution below:
-...
-
-# TODO: Create a DELETE API that enables users to delete a todo list item.
-# Requests to this API should include a request body matching the
-# Pydantic model type `TodoItem`.
-#
-# Hint: Inject the `TodoService` into your API method, like shown in the
-# `get_todos` function. Use the `TodoService.delete(subject, item)`
-# method to complete this operation.
-#
-# This API should not respond with any data to the frontend once called.
-#
-# Your solution below:
-...
+@api.put("", response_model=TodoItem, tags=["Todo"])
+def toggle_checkmark(
+    item: TodoItem, 
+    todo_service: TodoService = Depends(), 
+    subject: User = Depends(registered_user)
+) -> TodoItem:
+    """API to update a todo item's completion status."""
+    return todo_service.toggle_checkmark(subject, item)
+    
+@api.delete("/{id}", response_model=None, tags=["Todo"])
+def delete_todo(
+    id: int,
+    todo_service: TodoService = Depends(), 
+    subject: User = Depends(registered_user)
+) -> None:
+    """API to delete a todo item."""
+    todo_service.delete(subject, id)
+    
