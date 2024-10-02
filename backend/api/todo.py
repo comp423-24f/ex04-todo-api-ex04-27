@@ -55,11 +55,10 @@ def get_todos(
 ...
 
 # TODO: Create a DELETE API that enables users to delete a todo list item.
-# Requests to this API should include a request body matching the
-# Pydantic model type `TodoItem`.
+# The API route should include an ID, and there is no expected request body.
 #
 # Hint: Inject the `TodoService` into your API method, like shown in the
-# `get_todos` function. Use the `TodoService.delete(subject, item)`
+# `get_todos` function. Use the `TodoService.delete(subject, id)`
 # method to complete this operation.
 #
 # This API should not respond with any data to the frontend once called.

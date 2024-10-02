@@ -80,7 +80,8 @@ export class TodoService {
    */
   deleteItem(item: ToDoListItem) {
     // TODO: Using the `http` HttpClient, call the appropriate
-    // API to toggle the delete an item item for the user.
+    // API to toggle the delete an item item for the user. Note that
+    // the delete API accepts the item ID.
     //
     // This API call should return an `Observable` object.
     // Subscribe to the observable, using the `item` parameter,

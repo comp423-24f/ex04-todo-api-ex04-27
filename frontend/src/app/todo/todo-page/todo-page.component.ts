@@ -39,7 +39,9 @@ export class TodoPageComponent {
    * The constructor also defines fields provided via
    * dependency injection.
    */
-  constructor(protected todoService: TodoService) {}
+  constructor(protected todoService: TodoService) {
+    // TODO: Make sure that the service's todo item list is up to date.
+  }
 
   /** Adds a new item to the to-do list based on the string typed in. */
   addNewItem() {
