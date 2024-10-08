@@ -38,14 +38,13 @@ def get_todos(
 # This API should respond with the created `TodoItem` to the frontend once called.
 #
 # Your solution below:
-@api.post("", response_model=TodoItem, tags=["ToDo"])
-def post_todo(
+@api.post("", response_model=TodoItem, tags=["Todo"])
+def post_todos(
     item: TodoItem,
     todo_service: TodoService = Depends(),
     subject: User = Depends(registered_user),
 ) -> TodoItem:
     return todo_service.create(subject, item)
-
 
 
 # TODO: Create a PUT API that enables users to toggle todo list items.
@@ -59,7 +58,7 @@ def post_todo(
 # This API should respond with the edited `TodoItem` to the frontend once called.
 #
 # Your solution below:
-@api.put("", response_model=TodoItem, tags=["ToDo"])
+@api.put("", response_model=TodoItem, tags=["Todo"])
 def put_todos(
     item: TodoItem,
     todo_service: TodoService = Depends(),
@@ -77,8 +76,8 @@ def put_todos(
 # This API should not respond with any data to the frontend once called.
 #
 # Your solution below:
-@api.delete("/{id}", tags=["ToDo"])
-def delete_todo(
+@api.delete("/{id}", tags=["Todo"])
+def delete_todos(
     id: int,
     todo_service: TodoService = Depends(),
     subject: User = Depends(registered_user),

@@ -70,11 +70,7 @@ export class TodoService {
   toggleItemCheckmark(item: ToDoListItem) {
     this.http.put<ToDoListItem>('/api/todo', item).subscribe({
       next: (updatedItem) => this.todoList.update((items) => items.map((i) => i.id === updatedItem.id ? updatedItem : i)),
-      error: (err) => console.log(err)
     });
-    // TODO: Using the `http` HttpClient, call the appropriate
-    // API to toggle the checkmark of an item for the user.
-    //
     // This API call should return an `Observable` object.
     // Subscribe to the observable, and with the observable's
     // result, modify the exising `todoList` `WritableSignal`
