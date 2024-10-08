@@ -41,6 +41,14 @@ export class TodoService {
       completed: false
     };
 
+    this.http.post<ToDoListItem>('/api/todo', newItem).subscribe({
+      next: (item) => {
+        this.todoList.update((items) => [...items, item]);
+        console.log(item.id);
+      },
+      error: (err) => console.log(err)
+    });
+
     // TODO: Using the `http` HttpClient, call the appropriate
     // API to add a todo item for the user.
     //
@@ -60,6 +68,10 @@ export class TodoService {
    * @param item: Item to toggle the checkmark status for.
    */
   toggleItemCheckmark(item: ToDoListItem) {
+    this.http.put<ToDoListItem>('/api/todo', item).subscribe({
+      next: (updatedItem) => this.todoList.update((items) => items.map((i) => i.id === updatedItem.id ? updatedItem : i)),
+      error: (err) => console.log(err)
+    });
     // TODO: Using the `http` HttpClient, call the appropriate
     // API to toggle the checkmark of an item for the user.
     //
@@ -79,6 +91,11 @@ export class TodoService {
    * @param item:  Item to delete.
    */
   deleteItem(item: ToDoListItem) {
+    console.log(item.id);
+    this.http.delete(`/api/todo/${item.id}`).subscribe({
+      next: () => this.todoList.update((items) => items.filter((i) => i.id !== item.id)),
+      error: (err) => console.log(err)
+    });
     // TODO: Using the `http` HttpClient, call the appropriate
     // API to toggle the delete an item item for the user. Note that
     // the delete API accepts the item ID.

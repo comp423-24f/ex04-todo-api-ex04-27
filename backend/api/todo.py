@@ -38,7 +38,14 @@ def get_todos(
 # This API should respond with the created `TodoItem` to the frontend once called.
 #
 # Your solution below:
-...
+@api.post("", response_model=TodoItem, tags=["ToDo"])
+def post_todo(
+    item: TodoItem,
+    todo_service: TodoService = Depends(),
+    subject: User = Depends(registered_user),
+) -> TodoItem:
+    return todo_service.create(subject, item)
+
 
 
 # TODO: Create a PUT API that enables users to toggle todo list items.
@@ -52,7 +59,13 @@ def get_todos(
 # This API should respond with the edited `TodoItem` to the frontend once called.
 #
 # Your solution below:
-...
+@api.put("", response_model=TodoItem, tags=["ToDo"])
+def put_todos(
+    item: TodoItem,
+    todo_service: TodoService = Depends(),
+    subject: User = Depends(registered_user),
+) -> TodoItem:
+    return todo_service.toggle_checkmark(subject, item)
 
 # TODO: Create a DELETE API that enables users to delete a todo list item.
 # The API route should include an ID, and there is no expected request body.
@@ -64,4 +77,11 @@ def get_todos(
 # This API should not respond with any data to the frontend once called.
 #
 # Your solution below:
-...
+@api.delete("/{id}", tags=["ToDo"])
+def delete_todo(
+    id: int,
+    todo_service: TodoService = Depends(),
+    subject: User = Depends(registered_user),
+):
+    todo_service.delete(subject, id)
+    return {"detail": "Todo item deleted"}

@@ -40,6 +40,7 @@ export class TodoPageComponent {
    * dependency injection.
    */
   constructor(protected todoService: TodoService) {
+    this.todoService.getItems();
     // TODO: Make sure that the service's todo item list is up to date.
   }
 
@@ -51,7 +52,6 @@ export class TodoPageComponent {
     // is not null and if it is not empty.
     if (newItemTitle && newItemTitle.length > 0) {
       this.todoService.addItem(newItemTitle);
-      console.log(this.todoService.todoList());
     }
   }
 
