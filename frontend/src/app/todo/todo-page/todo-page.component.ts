@@ -65,6 +65,16 @@ export class TodoPageComponent {
   }
 
   /**
+   * Updates the title for inputted item using new "updateItemTitle" method in todo.service.ts
+   * needs to be used in html; create new update title button and click event method is this
+   * @param item: Item to update
+   */
+  updateTitle(item: ToDoListItem) {
+
+  }
+
+
+  /**
    * Deletes an item from the todo list.
    * @param item: Item to delete.
    */

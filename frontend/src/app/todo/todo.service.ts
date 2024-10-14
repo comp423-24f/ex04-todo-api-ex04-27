@@ -62,6 +62,15 @@ export class TodoService {
   }
 
   /**
+   *Add new method to update an items title usingnew put method in todo.py
+   * @param item: Item to update title
+   */ 
+
+  updateItemTitle(item: ToDoListItem) {
+
+  }
+
+  /**
    * Deletes an item from the to-do list.
    * @param item:  Item to delete.
    */
