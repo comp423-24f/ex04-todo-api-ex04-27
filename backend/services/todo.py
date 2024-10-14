@@ -51,7 +51,7 @@ class TodoService:
         if entity is None:
             raise ResourceNotFoundException(f"No todo item found with id: {item.id}")
         if entity.user_id != subject.id:
-            raise UserPermissionException(f"Cannot edit the todo items of others.")
+            raise UserPermissionException(f"Cannot edit the todo items of others.") # type: ignore
         entity.completed = not entity.completed
         self._session.commit()
         return entity.to_model()
@@ -62,7 +62,7 @@ class TodoService:
         if entity is None:
             raise ResourceNotFoundException(f"No todo item found with id: {item.id}")
         if entity.user_id != subject.id:
-            raise UserPermissionException(f"Cannot edit the todo items of others.")
+            raise UserPermissionException(f"Cannot edit the todo items of others.") # type: ignore        
         entity.title = title
         self._session.commit()
         return entity.to_model()
@@ -75,6 +75,6 @@ class TodoService:
         if entity is None:
             raise ResourceNotFoundException(f"No todo item found with id: {id}")
         if entity.user_id != subject.id:
-            raise UserPermissionException(f"Cannot edit the todo items of others.")
+            raise UserPermissionException(f"Cannot edit the todo items of others.") # type: ignore
         self._session.delete(entity)
         self._session.commit()

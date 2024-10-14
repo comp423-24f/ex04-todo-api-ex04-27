@@ -47,9 +47,6 @@ def toggle_checkmark(
     return todo_service.toggle_checkmark(subject, item)
 
 
-# add another put method that will update the title of an item using the "update_title" method
-
-
 @api.delete("/{id}", response_model=None, tags=["Todo"])
 def delete_todo(
     id: int,

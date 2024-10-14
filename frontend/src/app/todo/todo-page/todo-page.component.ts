@@ -69,8 +69,8 @@ export class TodoPageComponent {
    * needs to be used in html; create new update title button and click event method is this
    * @param item: Item to update
    */
-  updateTitle(item: ToDoListItem) {
-
+  updateTitle(item: ToDoListItem, title: String) {
+    this.todoService.updateItemTitle(item, title);
   }
 
 

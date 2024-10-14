@@ -66,8 +66,15 @@ export class TodoService {
    * @param item: Item to update title
    */ 
 
-  updateItemTitle(item: ToDoListItem) {
-
+  updateItemTitle(item: ToDoListItem, title: String) {
+    this.http
+    .put<ToDoListItem>(`api/todo/${title}`, item)
+    .subscribe((item) => 
+      this.todoList.update((todos) => [
+        ...todos.filter((todo) => todo.id !== item.id),
+        item
+      ])
+    );
   }
 
   /**
