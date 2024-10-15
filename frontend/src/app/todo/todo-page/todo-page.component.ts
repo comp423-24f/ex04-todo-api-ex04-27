@@ -25,6 +25,10 @@ export class TodoPageComponent {
     component: TodoPageComponent
   };
 
+  isEditable = false;
+  editItemTitleControl = new FormControl<string>(''); //form control for title editing
+  editingItemId: number | null = null; //tracks currently edited item
+
   /**
    * Encapsulates the form control for creating a new to-do list item.
    *
@@ -70,9 +74,30 @@ export class TodoPageComponent {
    * @param item: Item to update
    */
   updateTitle(item: ToDoListItem, title: String) {
+    this.isEditable = true;
     this.todoService.updateItemTitle(item, title);
   }
 
+  // Start editing an item
+  startEditing(item: ToDoListItem) {
+    this.editingItemId = item.id; // item in edit mode
+    this.editItemTitleControl.setValue(item.title); // form control with current title
+  }
+
+  // save the edited title and exit edit mode
+  saveItemTitle(item: ToDoListItem) {
+    const updatedTitle = this.editItemTitleControl.value;
+    if (updatedTitle && updatedTitle.length > 0) {
+      this.todoService.updateItemTitle(item, updatedTitle);
+      this.cancelEditing(); // exit edit mode after saving
+    }
+  }
+
+  // cancel and discard without saving edits
+  cancelEditing() {
+    this.editingItemId = null; // exit edit mode
+    this.editItemTitleControl.reset(); // clear edit input
+  }
 
   /**
    * Deletes an item from the todo list.

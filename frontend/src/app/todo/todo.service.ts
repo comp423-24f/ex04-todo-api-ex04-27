@@ -64,17 +64,17 @@ export class TodoService {
   /**
    *Add new method to update an items title usingnew put method in todo.py
    * @param item: Item to update title
-   */ 
+   */
 
   updateItemTitle(item: ToDoListItem, title: String) {
     this.http
-    .put<ToDoListItem>(`api/todo/${title}`, item)
-    .subscribe((item) => 
-      this.todoList.update((todos) => [
-        ...todos.filter((todo) => todo.id !== item.id),
-        item
-      ])
-    );
+      .put<ToDoListItem>(`api/todo/${title}`, item)
+      .subscribe((item) =>
+        this.todoList.update((todos) => [
+          ...todos.filter((todo) => todo.id !== item.id),
+          item
+        ])
+      );
   }
 
   /**

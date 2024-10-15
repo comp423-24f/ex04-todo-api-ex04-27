@@ -14,9 +14,9 @@
                     <mat-list-item role="listitem">
                         <div class="list-item-row">
                             <mat-checkbox [checked]="item.completed" (change)="checkmarkPressed(item)"/>
-                            {{ item.title }}
-                            <button mat-icon-button class="edit-button">
-                                <mat-icon clas=tertiary-icon>edit</mat-icon>
+                            <div contentEditable="isEditable">{{ item.title }}</div>
+                            <button mat-icon-button class="edit-button" (click)="isEditable">
+                                <mat-icon class=tertiary-icon>edit</mat-icon>
                             </button>
                             <button mat-icon-button class="delete-button" (click)="deleteItem(item)">
                                 <mat-icon class=tertiary-icon>delete</mat-icon>
