@@ -21,6 +21,11 @@
                             <!--current state: manually change if condition to true to see icons appear.
                             the edit button is still present, but save and cancel appear-->
                             @if (editingItemId === item.id) { <!-- save and cancel show up after going into edit mode-->
+                                <input
+                                matInput
+                                placeholder="Edit title"
+                                [formControl]="editItemTitleControl"
+                                /> <!--doesn't work, but hoping to be inline text replacement-->
                                 <button mat-icon-button class="save-button" (click)="saveItemTitle(item)"> <!--save-->
                                     <mat-icon class=tertiary-icon>check</mat-icon>
                                 </button> 
