@@ -78,13 +78,14 @@ export class TodoPageComponent {
     this.todoService.updateItemTitle(item, title);
   }
 
-  // Start editing an item
+  // NEW start editing an item
   startEditing(item: ToDoListItem) {
     this.editingItemId = item.id; // item in edit mode
+    this.isEditable = true;
     this.editItemTitleControl.setValue(item.title); // form control with current title
   }
 
-  // save the edited title and exit edit mode
+  // NEW save the edited title and exit edit mode
   saveItemTitle(item: ToDoListItem) {
     const updatedTitle = this.editItemTitleControl.value;
     if (updatedTitle && updatedTitle.length > 0) {
@@ -93,9 +94,10 @@ export class TodoPageComponent {
     }
   }
 
-  // cancel and discard without saving edits
+  // NEW cancel and discard without saving edits
   cancelEditing() {
     this.editingItemId = null; // exit edit mode
+    this.isEditable = false;
     this.editItemTitleControl.reset(); // clear edit input
   }
 

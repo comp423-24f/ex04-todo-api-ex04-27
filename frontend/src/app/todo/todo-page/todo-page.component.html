@@ -18,6 +18,16 @@
                             <button mat-icon-button class="edit-button" (click)="isEditable">
                                 <mat-icon class=tertiary-icon>edit</mat-icon>
                             </button>
+                            <!--current state: manually change if condition to true to see icons appear.
+                            the edit button is still present, but save and cancel appear-->
+                            @if (editingItemId === item.id) { <!-- save and cancel show up after going into edit mode-->
+                                <button mat-icon-button class="save-button" (click)="saveItemTitle(item)"> <!--save-->
+                                    <mat-icon class=tertiary-icon>check</mat-icon>
+                                </button> 
+                                <button mat-icon-button class="cancel-button" (click)="cancelEditing()"> <!--cancel-->
+                                    <mat-icon class=tertiary-icon>cancel</mat-icon>
+                                </button>
+                            }
                             <button mat-icon-button class="delete-button" (click)="deleteItem(item)">
                                 <mat-icon class=tertiary-icon>delete</mat-icon>
                             </button>
