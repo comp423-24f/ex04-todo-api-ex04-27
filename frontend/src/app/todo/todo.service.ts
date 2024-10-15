@@ -70,10 +70,7 @@ export class TodoService {
     this.http
       .put<ToDoListItem>(`api/todo/${title}`, item)
       .subscribe((item) =>
-        this.todoList.update((todos) => [
-          ...todos.filter((todo) => todo.id !== item.id),
-          item
-        ])
+        this.todoList.update((todos) => todos.map((i) => i.id === item.id ? item : i))
       );
   }
 

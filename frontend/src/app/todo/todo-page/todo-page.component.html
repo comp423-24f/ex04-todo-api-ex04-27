@@ -14,10 +14,6 @@
                     <mat-list-item role="listitem">
                         <div class="list-item-row">
                             <mat-checkbox [checked]="item.completed" (change)="checkmarkPressed(item)"/>
-                            <div contentEditable="isEditable">{{ item.title }}</div>
-                            <button mat-icon-button class="edit-button" (click)="isEditable">
-                                <mat-icon class=tertiary-icon>edit</mat-icon>
-                            </button>
                             <!--current state: manually change if condition to true to see icons appear.
                             the edit button is still present, but save and cancel appear-->
                             @if (editingItemId === item.id) { <!-- save and cancel show up after going into edit mode-->
@@ -32,7 +28,12 @@
                                 <button mat-icon-button class="cancel-button" (click)="cancelEditing()"> <!--cancel-->
                                     <mat-icon class=tertiary-icon>cancel</mat-icon>
                                 </button>
-                            }
+                            } @else {
+                                <div contentEditable="isEditable">{{ item.title }}</div>
+                                <button mat-icon-button class="edit-button" (click)="startEditing(item)">
+                                    <mat-icon class=tertiary-icon>edit</mat-icon>
+                                </button>
+                            } 
                             <button mat-icon-button class="delete-button" (click)="deleteItem(item)">
                                 <mat-icon class=tertiary-icon>delete</mat-icon>
                             </button>
@@ -42,8 +43,8 @@
                 } @empty {
                     <p id="empty-text">There is nothing in your to-do list! Add an item below.</p>
                 }
-              </mat-list>
-            </mat-card-content>
+            </mat-list>
+        </mat-card-content>
         <!-- Stores the bottom bar with a text input and a button. -->
         <mat-card-actions>
             <!-- This form field enables user input to add a new item. -->
